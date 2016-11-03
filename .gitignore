@@ -1,0 +1,99 @@
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <cctype>
+#include <iomanip>
+using namespace std;
+class records{
+	public:
+		void setmidterm(double midterm);
+		void setquizzes(double quiz1, double quiz2);
+		void setfinal(double final);
+		void setave(double, double, double, double);
+		double getquiz1();
+		double getquiz2();
+		double getmidterm();
+		double getfinal();
+		double getave();
+		records();
+	private:
+		double quiz1;
+		double quiz2;	//2 of them 10 points max; 25%
+		double midterm; // 100 points max; 25%
+		double final; // 100 points max; 50%
+		double ave_score; //total
+};
+
+int main() {
+	records my_records;
+	double quiz1, quiz2;
+	double mid_score;
+	double final_score;
+	cout<<"Enter in you 2 quiz scores"<<endl;
+	cin>> quiz1>>quiz2;
+	cout<<"Enter your midterm score"<<endl;
+	cin>>mid_score;
+	cout<<"Enter your final score"<<endl;
+	cin>>final_score;
+	my_records.setmidterm(mid_score);
+	my_records.setquizzes(quiz1,quiz2);
+	my_records.setfinal(final_score);
+	my_records.setave(quiz1,quiz2,final_score,mid_score);
+	cout<< "your quiz scores were: "<<my_records.getquiz1()<<" & "<<my_records.getquiz2()<<endl;
+	cout<<"Your midterm score was: "<<my_records.getmidterm()<<endl;
+	cout<<"Your final grade was: "<<my_records.getfinal()<<endl;
+	cout<<"your total grade is: "<<my_records.getave()<<endl;
+
+
+
+	return 0;
+}
+void records::setmidterm(double mid){
+	midterm = mid;
+}
+void records::setquizzes(double q1, double q2){
+	quiz1=q1;
+	quiz2=q2;
+}
+void records::setfinal(double fin){
+	final = fin;
+}
+void records::setave(double q1, double q2, double final, double midterm){
+	double avequiz = ((q1+q2)/2);
+	avequiz= (((avequiz/10)*100)*.25);
+	final = (((final/100)*100)*.5);
+	midterm = (((midterm/100)*100)*.25);
+	ave_score=(avequiz+final+midterm);
+}
+double records::getquiz1(){
+	return quiz1;
+}
+double records::getquiz2(){
+	return quiz2;
+}
+
+double records::getmidterm(){
+	return midterm;
+}
+double records::getfinal(){
+	return final;
+}
+double records::getave(){
+	return ave_score;
+}
+records::records(): quiz1(0), quiz2(0),midterm(0), final(0), ave_score(0){
+
+}
+/*OUTPUT
+Enter in you 2 quiz scores
+7
+9
+Enter your midterm score
+88
+Enter your final score
+69
+your quiz scores were: 7 & 9
+Your midterm score was: 88
+Your final grade was: 69
+your total grade is: 76.5
+*/
